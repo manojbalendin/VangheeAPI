@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using VangheeAPI.DAL;
+using VangheeAPI.Service;
 
 namespace VangheeAPI
 {
@@ -28,33 +23,32 @@ namespace VangheeAPI
         {
             services.AddControllers();
             services.Scan(scan => scan
-                    .FromAssemblyOf<CustomerService>()
+                    .FromAssemblyOf<VangheeAPIService>()
                     .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Service")))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
             services.Scan(scan => scan
-                    .FromAssemblyOf<CustomerRepository>()
+                    .FromAssemblyOf<VangheeAPIRepository>()
                     .AddClasses(classes => classes.Where(type => type.Name.EndsWith("Repository")))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                c.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "V1",
-                    Title = " Balendin Rest API",
-                    Description = "Demos provided by Balendin SOlutions",
+                    Title = "Vanghee Rest API",
+                    Description = "VangheeAPI",
                     TermsOfService = new Uri("https://balendinsolutions.com/"),
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact
                     {
-                        Name = "Manoj Singh",
-                        Email = "manojnctks@gmail.com",
-                        Url = new Uri("https://www.linkedin.com/in/manoj-singh-b9198026/")
+                        Name = "Nidhin Eapen",
+                        Email = "Nidhin.Eapen@balendin.co.in"                        
                     },
                     License = new Microsoft.OpenApi.Models.OpenApiLicense
                     {
-                        Name = "Balendin Solutions Open License",
+                        Name = "Vanghee Open License",
                         Url = new Uri("https://balendinsolutions.com/")
                     }
                 });

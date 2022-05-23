@@ -5,7 +5,7 @@ using VangheeAPI.Entities;
 
 namespace VangheeAPI.Service
 {
-    internal class VangheeAPIService : IVangheeAPIService
+    public class VangheeAPIService : IVangheeAPIService
     {
         private readonly IVangheeAPIRepository _repository;
 
